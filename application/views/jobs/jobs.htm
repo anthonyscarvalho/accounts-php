@@ -1,0 +1,178 @@
+<div class="modal-header"> <span ng-if="!add">Edit Job - # {{results.id}}</span> <span ng-if="add">Add Job</span>
+    <button class="close" ng-click="close()" type="button"><span class="fa fa-times"></span></button>
+</div>
+<div class="modal-body">
+    <form method="post" ng-submit="save()" id="form">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well well-sm">
+                    <legend>General Info</legend>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Assigned To</label>
+                                <select class="form-control input-sm" ng-model="results.users" ng-if="add">
+                                    <option value="">Please select one</option>
+                                    <option ng-repeat="res in users" ng-value="{{res.id}}">{{res.name + ' ' + res.surname}}</option>
+                                </select>
+                                <input type="text" class="form-control input-sm" ng-model="results.userName" value="" disabled="disabled" ng-if="!add">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" ng-if="!addAll">
+                                <label>Client #:</label>
+                                <input type="text" class="form-control input-sm" maxlength="250" ng-model="results.business" value="" disabled="disabled">
+                            </div>
+                            <div class="form-group" ng-if="addAll">
+                                <label>Client</label>
+                                <select class="form-control" chosen options="clients" ng-model="results.clients">
+                                    <option value="">Please select one</option>
+                                    <option ng-repeat="res in clients" ng-value="{{res.id}}">{{res.business}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Job Type</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-class="{'disabled': !add}" ng-model="results.categories" ng-repeat="res in categories" uib-btn-radio="res.id">{{res.category}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Completed</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="results.complete" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="results.complete" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea ng-model="results.notes" ui-tinymce="" id="tinymce_content" class="form-control" style="height:300px" name="tinymce_content">{{results.notes}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="well well-sm">
+                    <legend>Job Info</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Quoted</label>
+                                <input type="text" class="form-control" ng-model="results.quoted"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Invoiced</label>
+                                <input type="text" class="form-control" ng-model="results.invoice" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Paid</label>
+                                <input type="text" class="form-control" ng-model="results.paid" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Received</label>
+                                <input type="text" class="form-control" ng-model="results.received" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Begin</label>
+                                <input type="text" class="form-control" ng-model="results.design" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Completed</label>
+                                <input type="text" class="form-control" ng-model="results.ended" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="well well-sm">
+                    <legend>Scheduler</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Start</label>
+                                <input type="text" class="form-control" ng-model="results.start" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>End</label>
+                                <input type="text" class="form-control" ng-model="results.end" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>All Day</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="results.allDay" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="results.allDay" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="well well-sm" ng-if="results.categories=='120'">
+                    <legend>SEO Info</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>SEO</label>
+                                <input type="text" class="form-control" ng-model="results.seo" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Google</label>
+                                <input type="text" class="form-control" ng-model="results.google" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Yahoo</label>
+                                <input type="text" class="form-control" ng-model="results.Yahoo" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Bing</label>
+                                <input type="text" class="form-control" ng-model="results.bing" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>DMOZ</label>
+                                <input type="text" class="form-control" ng-model="results.dmz" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>TravelDex</label>
+                                <input type="text" class="form-control" ng-model="results.traveldex" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Links</label>
+                                <input type="text" class="form-control" ng-model="results.links" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Portfolio</label>
+                                <input type="text" class="form-control" ng-model="results.portfolio" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Facebook</label>
+                                <input type="text" class="form-control" ng-model="results.facebook" data-date-format="yyyy-mm-dd" data-provide="datepicker"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer"> <a ng-if="submitted" class="btn btn-info"><span class="fa fa-refresh fa-spin"></span></a>
+    <button ng-if="!submitted" type="submit" name="submit" value="insert" class="btn btn-success" form="form"><span class="fa fa-save"></span></button>
+</div>

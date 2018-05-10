@@ -1,0 +1,96 @@
+<div class="m-app-loading" ng-animate-children></div>
+<form method="post" ng-submit="save()" id="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" ng-if="!addAll">
+                    <label>Client #:</label>
+                    <input type="text" class="form-control input-sm" maxlength="250" ng-model="results.clients" value="" disabled="disabled">
+                </div>
+                <div class="form-group" ng-if="addAll">
+                    <label>Client
+                        <span ng-if="add" class="requiredField">*</span>
+                    </label>
+                    <select class="form-control" chosen options="clients" ng-model="results.clients">
+                        <option value="">Please select one</option>
+                        <option ng-repeat="res in clients" ng-value="{{res.id}}">{{res.business}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Name
+                        <span ng-if="add" class="requiredField">*</span>
+                    </label>
+                    <input type="text" class="form-control input-sm" maxlength="250" ng-model="results.name" value="">
+                </div>
+                <div class="form-group">
+                    <label>Surname</label>
+                    <input type="text" class="form-control input-sm" maxlength="250" ng-model="results.surname" value="">
+                </div>
+                <div class="form-group">
+                    <label>Number 1</label>
+                    <input type="phone" class="form-control input-sm" maxlength="250" ng-model="results.contact_number_1" value="">
+                </div>
+                <div class="form-group">
+                    <label>Number 2</label>
+                    <input type="phone" class="form-control input-sm" maxlength="250" ng-model="results.contact_number_2" value="">
+                </div>
+                <div class="form-group">
+                    <label>Email
+                        <span ng-if="add" class="requiredField">*</span>
+                    </label>
+                    <input type="email" class="form-control input-sm" maxlength="250" ng-model="results.email" value="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="well well-sm">
+                    <legend>Notifications</legend>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Payments</label>
+                            <div class="btn-group btn-group-sm" data-toggle="buttons">
+                                <label class="btn btn-default" ng-model="results.payment" uib-btn-radio="'true'">True</label>
+                                <label class="btn btn-default" ng-model="results.payment" uib-btn-radio="'false'">False</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Invoices</label>
+                            <div class="btn-group btn-group-sm" data-toggle="buttons">
+                                <label class="btn btn-default" ng-model="results.invoice" uib-btn-radio="'true'">True</label>
+                                <label class="btn btn-default" ng-model="results.invoice" uib-btn-radio="'false'">False</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Receipts</label>
+                            <div class="btn-group btn-group-sm" data-toggle="buttons">
+                                <label class="btn btn-default" ng-model="results.receipt" uib-btn-radio="'true'">True</label>
+                                <label class="btn btn-default" ng-model="results.receipt" uib-btn-radio="'false'">False</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Suspensions</label>
+                            <div class="btn-group btn-group-sm" data-toggle="buttons">
+                                <label class="btn btn-default" ng-model="results.suspension" uib-btn-radio="'true'">True</label>
+                                <label class="btn btn-default" ng-model="results.suspension" uib-btn-radio="'false'">False</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Adwords</label>
+                            <div class="btn-group btn-group-sm" data-toggle="buttons">
+                                <label class="btn btn-default" ng-model="results.adwords" uib-btn-radio="'true'">True</label>
+                                <label class="btn btn-default" ng-model="results.adwords" uib-btn-radio="'false'">False</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Quotations</label>
+                            <div class="btn-group btn-group-sm" data-toggle="buttons">
+                                <label class="btn btn-default" ng-model="results.quotes" uib-btn-radio="'true'">True</label>
+                                <label class="btn btn-default" ng-model="results.quotes" uib-btn-radio="'false'">False</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<ng-include src=" '/application/templates/tmp-footer.htm' "></ng-include>

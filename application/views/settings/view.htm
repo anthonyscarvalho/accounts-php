@@ -1,0 +1,38 @@
+<div class="m-app-loading" ng-animate-children></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="well well-sm">
+                <legend>Filter</legend>
+                <div class="form-group">
+                    <label>Search</label>
+                    <input class="form-control" ng-model="searchKeyword.$" type="text" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }">
+                </div>
+                <div class="form-group text-center">
+                    <button type="button" ng-click="load()" class="btn btn-info">Reset</button>
+                    <button type="button" ng-click="reset()" class="btn btn-default"><span class="fa fa-times"></span></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <table class="table table-condensed table-hover table-striped" ng-if="results.length">
+                <thead>
+                    <tr>
+                        <th custom-sort order="'name'" sort="sort">Name</th>
+                        <th style="width: 100px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="res in results | orderBy:sort.sortType:sort.sortReverse | filter:searchKeyword:strict || undefined">
+                        <td>{{res.name}}</td>
+                        <td class="text-right">
+                            <span ng-if="userRoles.edit == 'true'">
+                                <a class="btn btn-info btn-xs" ng-click="edit( res.id )"><span class="fa fa-pencil"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

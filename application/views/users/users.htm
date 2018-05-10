@@ -1,0 +1,302 @@
+<div class="modal-header">
+    <span ng-if="!add">Edit User -
+        {{results.id}}</span>
+    <span ng-if="add">Add User</span>
+    <button class="close" ng-click="close()" type="button">
+        <span class="fa fa-times"></span>
+    </button>
+</div>
+<div class="modal-body">
+    <form ng-submit="save()" method="post" id="form">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" maxlength="300" ng-model="results.name">
+                </div>
+                <div class="form-group">
+                    <label>Surname</label>
+                    <input type="text" class="form-control" maxlength="300" ng-model="results.surname">
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" maxlength="100" ng-model="results.username">
+                </div>
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input type="text" class="form-control" maxlength="100" ng-model="results.new_password">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="text" class="form-control" maxlength="20" ng-model="results.email_address">
+                </div>
+                <div class="form-group">
+                    <label>User Role</label>
+                    <div class="btn-group" role="group" data-toggle="buttons">
+                        <label class="btn btn-default" ng-repeat="res in roles" ng-model="results.roles" uib-btn-radio="res.id">{{res.role}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="well well-sm" ng-if="!add">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Adwords</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.campaigns" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.campaigns" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Categories</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.categories" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.categories" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Clients</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.clients" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.clients" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Companies</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.companies" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.companies" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Contacts</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.contacts" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.contacts" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Email Log</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.email_log" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.email_log" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Expenditure</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.expenditure" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.expenditure" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Invoices</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.invoices" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.invoices" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Invoice Emails</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.invoices_emails" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.invoices_emails" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Invoice Items</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.invoices_items" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.invoices_items" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Logs</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.logs" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.logs" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Products</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.products" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.products" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Quotations</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.quotes" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.quotes" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Jobs</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.jobs" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.jobs" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Statements</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.statements" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.statements" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Template PDFs</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.template_attachments" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.template_attachments" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Template Emails</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.template_emails" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.template_emails" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Template Quotes</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.template_quotations" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.template_quotations" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Transactions</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.transactions" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.transactions" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Tickets</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.tickets" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.tickets" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Users</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.users" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.users" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>User Roles</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.user_roles" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.user_roles" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Income</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.company_income" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.company_income" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Reports</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.report_overview" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.report_overview" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Control Sheet</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.report_controlsheet" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.report_controlsheet" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Quotations</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.quotations" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.quotations" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail text-center">
+                                <label>Settings</label>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="btn btn-default" ng-model="access.settings" uib-btn-radio="'true'">True</label>
+                                    <label class="btn btn-default" ng-model="access.settings" uib-btn-radio="'false'">False</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-if="submitted" class="btn btn-info">
+        <span class="fa fa-refresh fa-spin"></span>
+    </button>
+    <button ng-if="!submitted" type="submit" name="submitbtn" value="insert" class="btn btn-success" form="form">
+        <span class="fa fa-save"></span>
+    </button>
+    <button type="button" name="button" class="btn btn-primary" ng-click="load()">
+        <span class="fa fa-refresh"></span>
+    </button>
+</div>

@@ -1,0 +1,46 @@
+<div class="m-app-loading" ng-animate-children></div>
+<div class="container-fluid menu">
+    <legend>Management</legend>
+    <div class="row">
+        <div class="col-md-2 col-sm-3 col-xs-6" ng-repeat="menu in management | orderBy:'order'">
+            <div class="thumbnail"><a class="btn btn-primary btn-block" href="#{{menu.url}}" ng-click="close()">
+                <span class="fa fa-{{menu.icon}} fa-2x"></span></br>{{menu.name}}</a>
+            </div>
+        </div>
+    </div>
+    <legend>Admin</legend>
+    <div class="row">
+        <div class="col-md-2 col-sm-3 col-xs-6" ng-repeat="menu in admin | orderBy:'order'">
+            <div class="thumbnail"><a class="btn btn-primary btn-block" href="#{{menu.url}}" ng-click="close()">
+                <span class="fa fa-{{menu.icon}} fa-2x"></span></br>{{menu.name}}</a>
+            </div>
+        </div>
+    </div>
+    <div ng-if="userAccess.report_overview === 'true'">
+        <legend>Reports</legend>
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-6">
+                <div class="thumbnail"><a class="btn btn-sm btn-primary btn-block" href="#/reports/view" ng-click="close()">
+                    <span class="fa fa-list-alt fa-2x"></span></br>Reports</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="userAccess.expenditure === 'true'">
+        <legend>Expenditure</legend>
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-6">
+                <div class="thumbnail"><a class="btn btn-sm btn-primary btn-block" href="#/expenditure/view" ng-click="close()">
+                    <span class="fa fa-usd fa-2x"></span></br>Expenditure</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navbar navbar-default navbar-fixed-bottom text-center">
+    <a class="btn btn-default" href="#/dashboard"><span class="fa fa-home"></span></a>
+    <!-- <a class="btn" href="/profile" data-toggle="tooltip" title="Edit Profile">
+        <span class="fa fa-user fa-2x">
+    </span> -->
+    <a class="btn btn-warning" href="#/logout"><span class="fa fa-power-off "></span></a>
+</div>

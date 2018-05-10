@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <span ng-if="!add">Edit PDF Template - {{results.name}}</span>
+    <span ng-if="add">Add PDF Template</span>
+    <button class="close" ng-click="close()" type="button"><span class="fa fa-times"></span></button>
+</div>
+<div class="modal-body">
+    <form ng-submit="save()" method="post" id="form">
+        <div class="container">
+            <div class="form-group">
+                <label>Template Name</label>
+                <input type="text" class="form-control input-sm" name="name" ng-model="results.name">
+            </div>
+            <div class="form-group">
+                <label>Template Body</label>
+                <textarea ng-model="results.template" ui-tinymce="" id="tinymce_content" class="form-control" style="height:300px" name="tinymce_content"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <a ng-if="submitted" class="btn btn-info"><span class="fa fa-refresh fa-spin"></span></a>
+    <button ng-if="!submitted" type="submit" name="submit" value="insert" class="btn btn-success" form="form"><span class="fa fa-save"></span></button>
+</div>

@@ -1,0 +1,92 @@
+<div class="m-app-loading" ng-animate-children></div>
+<ng-include src=" '/application/templates/sub-nav.htm' " ng-if="subnav === 'true'"></ng-include>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="well well-sm">
+                <legend>Filter</legend>
+                <div class="form-group">
+                    <label>Load:</label>
+                    <div class="btn-group btn-group-sm" data-toggle="buttons">
+                        <label class="btn btn-default" ng-model="data.state" uib-btn-radio="''" ng-click="load()">All</label>
+                        <label class="btn btn-default" ng-model="data.state" uib-btn-radio="'false'" ng-click="load()">Active</label>
+                        <label class="btn btn-default" ng-model="data.state" uib-btn-radio="'true'" ng-click="load()">Canceled</label>
+                        <label class="btn btn-default" ng-model="data.state" uib-btn-radio="'complete'" ng-click="load()">Complete</label>
+                        <label class="btn btn-default" ng-model="data.state" uib-btn-radio="'incomplete'" ng-click="load()">Incomplete</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Search</label>
+                    <input class="form-control" ng-model="searchKeyword.$" type="text" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select class="form-control" ng-model="searchKeyword.categories">
+                        <<option value="">No Filter</option>
+                        <option ng-repeat="res in categories" ng-value="{{res.id}}">{{res.category}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>User</label>
+                    <select class="form-control" ng-model="searchKeyword.users">
+                        <<option value="">No Filter</option>
+                        <option ng-repeat="res in users" ng-value="{{res.id}}">{{res.name + ' ' + res.surname}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="text-center">
+                        <button type="button" ng-click="reset()" class="btn btn-default">Reset</button>
+                        <button type="button" ng-click="add()" class="btn btn-primary"><span class="fa fa-plus"></span></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Showing</label>
+                    <select ng-model="totalItems">
+                        <option ng-repeat="res in pagnation.dropdown" ng-value="{{res.number}}">{{res.name}}</option>
+                    </select> of {{(results|filter:searchKeyword).length}} records
+                </div>
+            </div>
+            <dir-pagination-controls max-size="pagnation.maxsize" direction-links="true" boundary-links="true"></dir-pagination-controls>
+        </div>
+        <div class="col-md-9">
+            <table class="table table-condensed table-hover table-striped click">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th custom-sort order="'business'" sort="sort">Client</th>
+                        <th custom-sort order="'quoted'" sort="sort">Quoted</th>
+                        <th custom-sort order="'received'" sort="sort">Received</th>
+                        <th custom-sort order="'end'" sort="sort">Completed</th>
+                        <th custom-sort order="'invoiced'" sort="sort">Invoiced</th>
+                        <th custom-sort order="'paid'" sort="sort">Paid</th>
+                        <th style="width: 120px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="res in results | orderBy:sort.sortType:sort.sortReverse | filter:searchKeyword:strict || undefined | itemsPerPage: totalItems">
+                        <td>{{res.id}}</td>
+                        <td>{{res.business}}</td>
+                        <td>{{res.quoted | currency:'R '}}</td>
+                        <td>{{res.received}}</td>
+                        <td>{{res.ended}}</td>
+                        <td>{{res.invoice}}</td>
+                        <td>{{res.paid}}</td>
+                        <td>
+                            <span ng-if="userRoles.edit == 'true'">
+                            <a class="btn btn-info btn-xs" ng-click="edit( res.id )"><span class="fa fa-pencil"></span></a>
+                            </span>
+                            <span ng-if="userRoles.status == 'true'">
+                                <a class="btn btn-danger btn-xs" ng-click="update( res.id, 'enable' )" ng-show="res.canceled == 'true'"><span class="fa fa-square-o"></span></a>
+                                <a class="btn btn-success btn-xs" ng-click="update( res.id, 'cancel' )" ng-show="res.canceled == 'false'"><span class="fa fa-square"></span></a>
+                            </span>
+                            <span ng-if="(userRoles.id === res.users) || (userRoles.id === '2')">
+                            <a class="btn btn-warning btn-xs" ng-click="update( res.id,'delete' )"><span class="fa fa-trash"></span></a>
+                            </span>
+                            <a class="btn btn-primary btn-xs" href="/#jobs/view/{{res.clients}}"><span class="fa fa-user"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

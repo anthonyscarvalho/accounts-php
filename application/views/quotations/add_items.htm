@@ -1,0 +1,78 @@
+<div class="modal-header">
+    <span ng-if="!add">Edit Product - {{results.id}}</span>
+    <span ng-if="add">Add Product</span>
+    <button class="close" ng-click="close()" type="button"><span class="fa fa-times"></span></button>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <legend>Product Details</legend>
+                <form method="post" ng-submit="close()" id="form">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group" ng-if="!add">
+                                <label>Item</label>
+                                  <input type="text" class="form-control input-sm" maxlength="250" ng-model="category.category" value="" disabled="disabled">
+                             </div>
+                             <div class="form-group" ng-if="add">
+                                <label>Item</label>
+                                <select class="form-control" chosen options="categories" ng-model="results.categories" ng-change="updatePrice()" id="categories">
+                                   <option value="">Please select one</option>
+                                   <option ng-repeat="res in categories" ng-value="{{res.id}}" data-price="{{res.price}}" data-name="{{res.category}}">{{res.category}}</option>
+                                </select>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="text" class="form-control" maxlength="250" ng-model="results.date" value="" ng-disabled="userRoles.id != '2'" data-date-format="yyyy-mm-dd" data-provide="datepicker">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="text" class="form-control" maxlength="250" ng-model="results.price" id="price" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input type="text" class="form-control" maxlength="80" ng-model="results.description" value="" ng-blur="cleanup()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well well-sm">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Renewable</label>
+                                    <div class="btn-group btn-group-sm" data-toggle="buttons">
+                                        <label ng-disabled="userRoles.id != '2'" class="btn btn-default" ng-repeat="res in renewable" ng-model="results.renewable" uib-btn-radio="res.id">{{res.name}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Period</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control" ng-model="results.period" value="" ng-disabled="results.renewable!='m'">
+                                        <span class="input-group-addon">months</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <a ng-if="submitted" class="btn btn-info"><span class="fa fa-refresh fa-spin"></span></a>
+    <button ng-if="!submitted" type="submit" name="submit" value="insert" class="btn btn-success" form="form"><span class="fa fa-save"></span></button>
+</div>

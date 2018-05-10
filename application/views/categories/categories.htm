@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <span ng-if="!add">Edit Category - {{results.category}}</span>
+    <span ng-if="add">Add Category</span>
+    <button class="close" ng-click="close()" type="button"><span class="fa fa-times"></span></button>
+</div>
+<div class="modal-body">
+    <form ng-submit="save()" method="post" id="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <input type="text" class="form-control" maxlength="300" ng-model="results.category" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="text" class="form-control" maxlength="300" ng-model="results.price">
+                    </div>
+                    <div class="form-group">
+                        <label>Link</label>
+                        <div class="btn-group btn-group-sm">
+                            <label class="btn btn-default" ng-model="results.link" uib-btn-radio="'invoice'" uncheckable>Invoice</label>
+                            <label class="btn btn-default" ng-model="results.link" uib-btn-radio="'expense'" uncheckable>Expense</label>
+                            <label class="btn btn-default" ng-model="results.link" uib-btn-radio="'jobs'" uncheckable>Jobs</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <a ng-if="submitted" class="btn btn-info"><span class="fa fa-refresh fa-spin"></span></a>
+    <button ng-if="!submitted" type="submit" name="submit" value="insert" class="btn btn-success" form="form"><span class="fa fa-save"></span></button>
+</div>

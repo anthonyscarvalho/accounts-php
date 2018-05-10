@@ -1,0 +1,137 @@
+<div class="modal-header">Edit Setting -
+    {{results.name}}
+    <button class="close" ng-click="close()" type="button">
+        <span class="fa fa-times"></span>
+    </button>
+</div>
+<div class="modal-body">
+    <form ng-submit="save()" method="post" id="form">
+        <div class="container">
+            <div ng-if="results.name=='templates'">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="form-group">
+                            <label>Invoice Template</label>
+                            <select class="form-control" options="attachments" ng-model="value.invoice" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in attachments" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Transactions Statement</label>
+                            <select class="form-control" options="attachments" ng-model="value.transactions_statment" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in attachments" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Adwords Invoice</label>
+                            <select class="form-control" options="attachments" ng-model="value.adwords_invoice" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in attachments" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Adwords Statement</label>
+                            <select class="form-control" options="attachments" ng-model="value.adwords_statement" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in attachments" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Terms of Service</label>
+                            <select class="form-control" options="attachments" ng-model="value.terms_of_service" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in attachments" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="results.name=='email'">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>First Invoice</label>
+                            <select class="form-control" options="emails" ng-model="value.first_invoice" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in emails" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Second Invoice</label>
+                            <select class="form-control" options="emails" ng-model="value.second_invoice" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in emails" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Suspension Notice</label>
+                            <select class="form-control" options="emails" ng-model="value.suspension_notice" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in emails" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Termination Notice</label>
+                            <select class="form-control" options="emails" ng-model="value.termination_notice" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in emails" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Account Statement</label>
+                            <select class="form-control" options="emails" ng-model="value.account_statement" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in emails" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quptation Generated</label>
+                            <select class="form-control" options="emails" ng-model="value.quotation" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in emails" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Invoice Paid</label>
+                            <select class="form-control" options="emails" ng-model="value.invoice_paid" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in emails" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Payment Confirmation</label>
+                            <select class="form-control" options="emails" ng-model="value.payment_confirmation" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in emails" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Adwords Topup</label>
+                            <select class="form-control" options="emails" ng-model="value.adwords_topup" chosen>
+                                <option value="">Selete one</option>
+                                <option ng-repeat="res in emails" value="{{res.id}}">{{res.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <a ng-if="submitted" class="btn btn-info right-btn">
+        <span class="fa fa-refresh fa-spin"></span>
+    </a>
+    <button ng-if="!submitted" type="submit" name="submitBtn" class="btn btn-success right-btn" form="form">
+        <span class="fa fa-save"></span>
+    </button>
+    <button type="button" name="button" class="btn btn-primary" ng-click="load()">
+        <span class="fa fa-refresh"></span>
+    </button>
+</div>

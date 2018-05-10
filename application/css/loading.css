@@ -1,0 +1,112 @@
+div.m-app-loading {
+    position: fixed;
+    z-index: 99999999;
+}
+
+div.m-app-loading div.animated-container {
+    background-color: #FFFFFF;
+    bottom: 0px;
+    left: 0px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+}
+
+
+/* Used to initialize the ng-leave animation state. */
+
+div.m-app-loading div.animated-container.ng-leave {
+    opacity: 1.0;
+    transition: all linear 200ms;
+    -webkit-transition: all linear 200ms;
+}
+
+div.m-app-loading div.messaging {
+    color: #000000;
+    left: 0px;
+    margin-top: -37px;
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    top: 50%;
+}
+
+div.m-app-loading h1 {
+    font-size: 40pt;
+    margin: 0px 0px 20px 0px;
+    font-family: Tahoma !important;
+}
+
+div.m-app-loading p {
+    font-size: 18px;
+    margin: 0px 0px 0px 0px;
+    font-family: Tahoma !important;
+}
+
+div.m-app-loading #cssloader {
+    display: block;
+    position: relative;
+    top: 20%;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #3498db;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+div.m-app-loading #cssloader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #e74c3c;
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+
+div.m-app-loading #cssloader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #f9c922;
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,59 @@
+<div class="m-app-loading" ng-animate-children></div>
+<ng-include src=" '/application/templates/sub-nav.htm' " ng-if="subnav === 'true'"></ng-include>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <ng-include src=" '/application/templates/filter-box.htm' "></ng-include>
+        </div>
+        <div class="col-md-9">
+            <table class="table table-condensed table-hover table-striped click">
+                <thead>
+                    <tr>
+                        <th custom-sort order="'date'" sort="sort">Date</th>
+                        <th custom-sort order="'clientName'" sort="sort">Client</th>
+                        <th custom-sort order="'categoryName'" sort="sort">Category</th>
+                        <th custom-sort order="'description'" sort="sort">Description</th>
+                        <th custom-sort order="'price'" sort="sort">Price</th>
+                        <th custom-sort order="'renewable'" sort="sort">Renewable</th>
+                        <th custom-sort order="'lastInvoice'" sort="sort">Last Invoice</th>
+                        <th style="width: 120px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="res in results| itemsPerPage: pagnation.totalItems" current-page="paginationPage" total-items="totalRecords">
+                        <td>{{res.date}}</td>
+                        <td>{{res.clientName}}</td>
+                        <td>{{res.categoryName}}</td>
+                        <td class="short-description">{{res.description}}</td>
+                        <td>{{res.price}}</td>
+                        <td>{{res.renewable}}</td>
+                        <td>{{res.lastInvoice}}</td>
+                        <td>
+                            <span ng-if="userRoles.edit == 'true'">
+                                <a class="btn btn-info btn-xs" href="#/products/edit/{{res.id}}">
+                                    <span class="fa fa-pencil"></span>
+                                </a>
+                            </span>
+                            <span ng-if="userRoles.status == 'true'">
+                                <a class="btn btn-danger btn-xs" ng-click="update( res.id, 'enable' )" ng-show="res.canceled == 'true'">
+                                    <span class="fa fa-square-o"></span>
+                                </a>
+                                <a class="btn btn-success btn-xs" ng-click="update( res.id, 'cancel' )" ng-show="res.canceled == 'false'">
+                                    <span class="fa fa-square"></span>
+                                </a>
+                            </span>
+                            <span ng-if="userRoles.delete == 'true'">
+                                <a class="btn btn-warning btn-xs" ng-click="update( res.id, 'delete')">
+                                    <span class="fa fa-trash"></span>
+                                </a>
+                            </span>
+                            <a class="btn btn-primary btn-xs" href="/#products/view/{{res.clients}}">
+                                <span class="fa fa-user"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

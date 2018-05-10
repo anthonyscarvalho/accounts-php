@@ -1,0 +1,97 @@
+<div class="m-app-loading" ng-animate-children></div>
+<div class="well well-sm">
+    <form ng-submit="loadInvoices()">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" maxlength="250" ng-model="year" value="" required data-date-format="yyyy" data-provide="datepicker" data-date-min-view-mode="2" data-date-max-view-mode="2">
+                        <span class="input-group-btn">
+
+                        <button type="submit"  class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="btn-group" role="group" data-toggle="buttons">
+                        <label class="btn btn-default" ng-model="data.activeCompany" uib-btn-radio="0" ng-click="loadInvoices()">All</label>
+                        <label class="btn btn-default" ng-repeat="res in companies" ng-model="data.activeCompany" uib-btn-radio="res.id" ng-click="loadInvoices()">{{res.company}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Invoices</div>
+                <div class="panel-body">
+                    <canvas class="chart chart-line" chart-data="invoices.data" chart-labels="invoices.labels" chart-series="invoices.series" chart-colors="lineGraph" chart-options="graphoptions" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Monthly Income</div>
+                <div class="panel-body">
+                    <canvas class="chart chart-bar" chart-data="monthly.data" chart-labels="monthly.labels" chart-series="monthly.series" chart-colors="barGraph" chart-options="graphoptions" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">5 Year Annual Income</div>
+                <div class="panel-body">
+                    <canvas class="chart chart-bar" chart-data="anual.data" chart-labels="anual.labels" chart-series="anual.series" chart-colors="barGraph" chart-options="graphoptions" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Expected vs Actual</div>
+                <div class="panel-body">
+                    <canvas class="chart chart-bar" chart-data="monthlyPred.data" chart-labels="monthlyPred.labels" chart-series="monthlyPred.series" chart-colors="barGraph" chart-options="graphoptions" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">3 Year Monthly Income</div>
+                <div class="panel-body">
+                    <canvas class="chart chart-bar" chart-data="monthlyPrev.data" chart-labels="monthlyPrev.labels" chart-series="monthlyPrev.series" chart-colors="barGraph" chart-options="graphoptions" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">5 Year Annual Income vs Expense</div>
+                <div class="panel-body">
+                    <canvas class="chart chart-bar" chart-data="annualExp.data" chart-labels="annualExp.labels" chart-series="annualExp.series" chart-colors="barGraph" chart-options="graphoptions" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Recent Emails</div>
+                <div class="panel-body">
+                    <table class="table table-condensed table-striped">
+                        <tr ng-repeat="res in emails">
+                            <td>{{res.id}}</td>
+                            <td>{{res.username}}</td>
+                            <td>{{res.contactname}}</td>
+                            <td>{{res.subject}}</td>
+                            <td>{{res.date}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <ng-include src=" '/application/views/jobs/user_jobs.htm' "></ng-include>
+        </div>
+    </div>
+</div>

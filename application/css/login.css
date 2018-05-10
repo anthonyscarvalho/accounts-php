@@ -1,0 +1,25 @@
+/* login screen */
+
+.loginWrapper {
+    position: fixed;
+    background-color: #ccc;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+
+.loginForm {
+    width: 300px;
+    margin: 250px auto;
+}
+
+.loginForm .panel {
+    border-color: #337AB7;
+}
+
+.loginForm .panel-heading {
+    background-color: #337AB7;
+    background-image: none;
+    color: #fff;
+    text-shadow: none;
+}

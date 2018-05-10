@@ -1,0 +1,27 @@
+
+CREATE TABLE IF NOT EXISTS `jobs` (
+  `id` int(11) NOT NULL,
+  `clients` int(10) NOT NULL,
+  `users` int(10) NOT NULL,
+  `categories` int(10) NOT NULL,
+  `quoted` decimal(50,2) DEFAULT NULL,
+  `received` date DEFAULT NULL,
+  `end` date DEFAULT NULL,
+  `design` date DEFAULT NULL,
+  `seo` date DEFAULT NULL,
+  `google` date DEFAULT NULL,
+  `yahoo` date DEFAULT NULL,
+  `bing` date DEFAULT NULL,
+  `dmz` date DEFAULT NULL,
+  `traveldex` date DEFAULT NULL,
+  `links` date DEFAULT NULL,
+  `portfolio` date DEFAULT NULL,
+  `facebook` date DEFAULT NULL,
+  `invoice` date DEFAULT NULL,
+  `paid` date DEFAULT NULL,
+  `notes` text,
+  `complete` varchar(10) NOT NULL DEFAULT 'false',
+  `creation_date` datetime NOT NULL,
+  `canceled` varchar(10) DEFAULT NULL,
+  `canceled_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

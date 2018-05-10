@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.well.proposal {
+    background: none !important;
+    background-color: transparent !important;
+}

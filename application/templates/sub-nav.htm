@@ -1,0 +1,22 @@
+<ol class="breadcrumb">
+    <!--clients-->
+    <li ng-class="{'active': SetClient}" ng-if="userAccess.clients === 'true'"><a href="#/clients/edit/{{parent}}">Client</a></li>
+    <!--contacts-->
+    <li ng-class="{'active': SetContacts}" ng-if="userAccess.contacts === 'true'"><a href="#/contacts/view/{{parent}}">Contacts</a></li>
+    <!--products-->
+    <li ng-class="{'active': SetProducts}" ng-if="userAccess.products === 'true'"><a href="#/products/view/{{parent}}">Products</a></li>
+    <!--invoices-->
+    <li ng-class="{'active': SetInvoices}" ng-if="userAccess.invoices === 'true'"><a href="#/invoices/view/{{parent}}">Invoices</a></li>
+    <!--attachments-->
+    <li ng-class="{'active': SetAttachments}"><a href="#/attachments/view/{{parent}}">Attachments</a></li>
+    <!--google ads-->
+    <li ng-class="{'active': SetTransactions}" ng-if="userAccess.transactions === 'true'"><a href="#/transactions/view/{{parent}}">Transactions</a></li>
+    <!--email log-->
+    <li ng-class="{'active': SetEmailLog}" ng-if="userAccess.email_log === 'true'"><a href="#/email_log/view/{{parent}}">Email Log</a></li>
+    <!--quotations-->
+    <li ng-class="{'active': SetQuotations}" ng-if="userAccess.quotations === 'true'"><a href="#/quotations/view/{{parent}}">Quotations</a></li>
+    <!--client jobs-->
+    <li ng-class="{'active': SetJobs}" ng-if="userAccess.jobs === 'true'"><a href="#/jobs/view/{{parent}}">Jobs</a></li>
+    <!--client log-->
+    <li ng-class="{'active': SetClientLog}" ng-if="userAccess.logs === 'true'"><a href="#/logs/view/{{parent}}">Log</a></li>
+</ol>

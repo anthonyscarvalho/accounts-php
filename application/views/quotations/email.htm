@@ -1,0 +1,27 @@
+<div class="modal-header">Email Invoice
+    <button class="close" ng-click="close()" type="button">
+        <span class="fa fa-times"></span>
+    </button>
+</div>
+<div class="modal-body">
+    <form method="post" ng-submit="sendEmail( )" id="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <label>Email Subject</label>
+                    <input type="text" class="form-control" name="subject" ng-model="data.emailsubject">
+                    <label>Body Of Email</label>
+                    <textarea ng-model="data.emailbody" ui-tinymce="" id="tinymce_content" class="form-control" style="height:300px" name="tinymce_content">{{data.emailbody}}</textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <a ng-if="submitted" class="btn btn-info">
+        <span class="fa fa-refresh fa-spin"></span>
+    </a>
+    <button ng-if="!submitted" type="submit" name="submitbtn" class="btn btn-success" form="form">
+        <span class="fa fa-envelope"></span>
+    </button>
+</div>

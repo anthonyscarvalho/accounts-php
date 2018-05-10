@@ -1,0 +1,83 @@
+/*general classes*/
+
+div,
+p,
+label {
+    font-size: 12px !important;
+}
+
+body {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    font-family: Tahoma !important;
+    background-color: #fff;
+}
+
+hr {
+    border-color: #333;
+}
+
+label {
+    font-weight: normal;
+    display: block;
+}
+
+p {
+    margin: 20px 0px;
+}
+
+.short-description {
+    max-width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hideField {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+.well {
+    background-color: #FFFFFC;
+}
+
+.table-striped>tbody>tr:nth-of-type(2n+1) {
+    background-color: #F4F4F4;
+    color: #000;
+}
+
+.table-hover>tbody>tr:hover,
+.table>tbody>tr.active>td,
+.table>tbody>tr.active>th,
+.table>tbody>tr>td.active,
+.table>tbody>tr>th.active,
+.table>tfoot>tr.active>td,
+.table>tfoot>tr.active>th,
+.table>tfoot>tr>td.active,
+.table>tfoot>tr>th.active,
+.table>thead>tr.active>td,
+.table>thead>tr.active>th,
+.table>thead>tr>td.active,
+.table>thead>tr>th.active {
+    background-color: #196EC3 !important;
+    color: #fff;
+}
+
+.requiredField {
+    color: #FF0000;
+}
+
+.fc-time {
+    display: none !important;
+}
+
+.text10 {
+    font-size: 10px !important;
+}

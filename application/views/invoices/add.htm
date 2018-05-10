@@ -1,0 +1,124 @@
+<div class="m-app-loading" ng-animate-children></div>
+<form method="post" ng-submit="save()" id="form">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- <div class="form-group">
+                    <label>Company</label>
+                    <select class="form-control input-sm" ng-model="data.company">
+                        <option ng-value="" value="" selected="">Select one</option>
+                        <option ng-repeat="res in companies" ng-value="'{{res.id}}'" value="{{res.id}}">{{res.company}}</option>
+                    </select>
+                </div> -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-if="!addAll">
+                            <label>Client #:</label>
+                            <input type="text" class="form-control input-sm" maxlength="250" ng-model="data.clients" value="" disabled="disabled">
+                        </div>
+                        <div class="form-group" ng-if="addAll">
+                            <label>Client</label>
+                            <select class="form-control input-sm" id="clients" required chosen options="clients" ng-model="data.clients" ng-change="updateSubject()">
+                                <option ng-repeat="res in clients" ng-value="{{res.id}}" data-client="{{res.business}}">{{res.business}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Date:</label>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control input-sm" maxlength="250" ng-model="data.prodDate" data-date-format="yyyy-mm-dd" data-provide="datepicker">
+                                <span class="input-group-btn">
+                                    <button ng-click="load()" class="btn btn-sm btn-default" type="button"><span class="fa fa-search"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-repeat="res in invoiceProds" class="well well-sm">
+                    <div class="row">
+                        <div class="col-md-6"><strong>{{res.company}}</strong></div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>VAT:</label>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">%</span>
+                                    <input type="text" class="form-control" ng-model="data.products[$index].vat" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Deposit:</label>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">R</span>
+                                    <input type="text" class="form-control" ng-model="data.products[$index].deposit" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Invoice Total:</label>
+                                <div class="input-group input-group-sm disabled">
+                                    <input type="text" class="form-control" value="{{calculateTotal($index) | currency:'R '}}" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-condensed text10" ng-if="res.items.length">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Date</th>
+                                <th style="width: 40px;"></th>
+                                <th>Product</th>
+                                <th style="width: 200px;">Description</th>
+                                <th style="width: 100px;">Amount</th>
+                                <th style="width: 80px;">Last Invoice</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="res2 in res.items" ng-click="addToInvoice(res, res2);" ng-class="getClass(res, res2);">
+                            <tr>
+                                <td>{{res2.date}}</td>
+                                <td>{{res2.renewable}}</td>
+                                <td>{{res2.categoryName}}</td>
+                                <td>{{res2.description}}</td>
+                                <td>{{res2.price | currency:'R '}}</td>
+                                <td>{{res2.lastInvoice}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Send Email:</label>
+                            <div class="btn-group input-group-sm">
+                                <label class="btn btn-default" ng-model="data.sendMail" uib-btn-radio="'true'">Yes</label>
+                                <label class="btn btn-default" ng-model="data.sendMail" uib-btn-radio="'false'">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Invoice Type:</label>
+                            <div class="btn-group input-group-sm">
+                                <label class="btn btn-default" ng-model="data.invoiceType" uib-btn-radio="'due'" ng-click="updateDate()">Due</label>
+                                <label class="btn btn-default" ng-model="data.invoiceType" uib-btn-radio="'now'" ng-click="updateDate()">Now</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="well well-sm">
+                    <legend>Email</legend>
+                    <label>Subject</label>
+                    <input type="text" class="form-control" name="subject" ng-model="data.emailsubject">
+                    <label>Body Of Email</label>
+                    <textarea ng-model="data.emailbody" ui-tinymce="" id="tinymce_content" class="form-control" style="height:300px" name="tinymce_content">{{data.emailbody}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<ng-include src=" '/application/templates/tmp-footer.htm' "></ng-include>

@@ -1,0 +1,53 @@
+<div class="panel panel-success" ng-controller="userJobs">
+    <div class="panel-heading">Current Jobs
+        <button type="button" ng-click="add()" class="btn btn-primary btn-xs pull-right">
+            <span class="fa fa-plus"></span>
+        </button>
+    </div>
+    <div class="panel-body">
+        <table class="table table-condensed table-hover table-striped click">
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Quoted</th>
+                    <th>Received</th>
+                    <th>Completed</th>
+                    <th>Invoiced</th>
+                    <th>Paid</th>
+                    <th style="width: 120px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="res in results | orderBy:sort.sortType:sort.sortReverse">
+                    <td>{{res.business}}</td>
+                    <td>{{res.quoted | currency:'R '}}</td>
+                    <td>{{res.received}}</td>
+                    <td>{{res.ended}}</td>
+                    <td>{{res.invoice}}</td>
+                    <td>{{res.paid}}</td>
+                    <td>
+                        <span ng-if="userRoles.edit == 'true'">
+                            <a class="btn btn-info btn-xs" ng-click="edit( res.id )">
+                                <span class="fa fa-pencil"></span>
+                        </a>
+                        </span>
+                        <span ng-if="userRoles.status == 'true'">
+                            <a class="btn btn-danger btn-xs" ng-click="update( res.id, 'enable' )" ng-show="res.canceled == 'true'">
+                                <span class="fa fa-square-o"></span>
+                        </a>
+                        <a class="btn btn-success btn-xs" ng-click="update( res.id, 'cancel' )" ng-show="res.canceled == 'false'">
+                                <span class="fa fa-square"></span>
+                            </a>
+                        </span>
+                        <a class="btn btn-warning btn-xs" ng-click="delete( res.id )">
+                            <span class="fa fa-trash"></span>
+                        </a>
+                        <a class="btn btn-primary btn-xs" href="/#jobs/view/{{res.clients}}">
+                            <span class="fa fa-user"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+<div class="m-app-loading" ng-animate-children></div>
+<div class="container-fluid">
+    <form method="post" ng-submit="save()" id="form">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="well well-sm">
+                    <legend>Quote Info</legend>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Client #:</label>
+                            <div ng-if="!addAll">
+                                <input type="text" class="form-control input-sm" maxlength="250" ng-model="data.clientName" value="" disabled="disabled">
+                            </div>
+                            <div ng-if="addAll">
+                                <select class="form-control input-sm" chosen options="clients" ng-model="data.clients">
+                                    <option ng-repeat="res in clients" ng-value="{{res.id}}" data-client="{{res.business}}">{{res.business}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Deposit</label>
+                            <input type="text" class="form-control input-sm" maxlength="250" ng-model="data.deposit" value="">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Company</label>
+                            <div class="btn-group" role="group" data-toggle="buttons">
+                                <label class="btn btn-default" ng-repeat="res in companies" ng-model="data.companies" uib-btn-radio="res.id" ng-click="getTemplates()">{{res.company}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12" ng-if="add">
+                            <label>Quote Template</label>
+                            <div class="btn-group btn-group-sm" data-toggle="buttons">
+                                <label class="btn btn-default" ng-repeat="res in templates" ng-model="data.template" uib-btn-radio="res.id" ng-click="loadTemplate(res.id)">{{res.name}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Notes</label>
+                            <textarea ng-model="data.notes" ui-tinymce="" class="form-control" style="height:100px"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="well well-sm">
+                    <legend>Products
+                        <span class="pull-right">
+                            <button class="btn btn-primary btn-xs" ng-click="addProducts()" type="button">
+                                <span class="fa fa-plus"></span>
+                            </button>
+                        </span>
+                    </legend>
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th style="width:50px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="res in products">
+                                <td>{{res.categoryName}}</td>
+                                <td>{{res.description}}</td>
+                                <td>{{res.price}}</td>
+                                <td class="text-right">
+                                    <span>
+                                        <a class="btn btn-warning btn-xs" ng-click="deleteProducts( $index )">
+                                            <span class="fa fa-trash"></span>
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="well well-sm">
+                    <legend>Emails Sent</legend>
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="res in emails">
+                                <td>{{res.date}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="well well-sm">
+                    <legend>Quotation Scope</legend>
+                    <textarea ng-model="data.scope" ui-tinymce="" class="form-control" style="height:300px"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="well well-sm">
+                    <legend>Quotation Content</legend>
+                    <textarea ng-model="data.content" ui-tinymce="" class="form-control" style="height:300px"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well well-sm">
+                    <legend>Signature</legend>
+                    <textarea ng-model="data.signature" ui-tinymce="" class="form-control" style="height:300px"></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="well well-sm">
+                    <legend>Annexure</legend>
+                    <textarea ng-model="data.annexure" ui-tinymce="" class="form-control" style="height:300px"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="navbar navbar-default navbar-fixed-bottom text-center">
+    <a href="#/quotations/view/{{data.clients}}" class="btn btn-default">
+        <span class="fa fa-backward"></span>
+    </a>
+    <a class="btn btn-info" ng-if="submitted">
+        <span class="fa fa-refresh fa-spin"></span>
+    </a>
+    <button ng-if="!submitted" type="submit" name="submit" value="insert" class="btn btn-success" form="form">
+        <span class="fa fa-save"></span>
+    </button>
+    <a class="btn btn-warning" href="/app/quotations/print/{{data.id}}" target="_blank" ng-if="!add">
+        <span class="fa fa-print"></span>
+    </a>
+    <!-- <button class="btn btn-primary" ng-click="sendInvoice( data.id )" type="button" ng-if="!add">
+        <span class="fa fa-envelope"></span>
+    </button> -->
+</div>

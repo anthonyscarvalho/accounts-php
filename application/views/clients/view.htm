@@ -1,0 +1,53 @@
+<div class="m-app-loading" ng-animate-children></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <ng-include src=" '/application/templates/filter-box.htm' "></ng-include>
+        </div>
+        <div class="col-md-9">
+            <table class="table table-condensed table-hover table-striped click">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th custom-sort order="'business'" sort="sort">Business</th>
+                        <th custom-sort order="'city'" sort="sort">City</th>
+                        <th custom-sort order="'signup'" sort="sort">Signed Up</th>
+                        <th custom-sort order="'canceled'" sort="sort">Canceled</th>
+                        <th>Date Canceled</th>
+                        <th style="width: 100px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="res in results| itemsPerPage: pagnation.totalItems" current-page="paginationPage" total-items="totalRecords">
+                        <td>{{res.id}}</td>
+                        <td>{{res.business}}</td>
+                        <td>{{res.city}}</td>
+                        <td>{{res.signup_date}}</td>
+                        <td>{{res.canceled}}</td>
+                        <td>{{res.canceled_date}}</td>
+                        <td>
+                            <span ng-if="userRoles.edit == 'true'">
+                                <a class="btn btn-info btn-xs" href="#/clients/edit/{{res.id}}">
+                                    <span class="fa fa-pencil"></span>
+                                </a>
+                            </span>
+                            <span ng-if="userRoles.status == 'true'">
+                                <a class="btn btn-danger btn-xs" ng-click="update( res.id, 'enable' )" ng-show="res.canceled == 'true'">
+                                    <span class="fa fa-square-o"></span>
+                                </a>
+                                <a class="btn btn-success btn-xs" ng-click="update( res.id, 'cancel' )" ng-show="res.canceled == 'false'">
+                                    <span class="fa fa-square"></span>
+                                </a>
+                            </span>
+                            <span ng-if="userRoles.delete == 'true'">
+                                <a class="btn btn-warning btn-xs" ng-click="delete( res.id )">
+                                    <span class="fa fa-trash"></span>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
