@@ -57,7 +57,7 @@ class products
             {
                 $_tmpCompanies = $db->select( "SELECT id, company FROM companies WHERE canceled='false'" );
 
-                if ( count( $_tmpCompanies['data'] > 0 ) )
+                if ( count( $_tmpCompanies['data'] ) > 0 )
                 {
                     $_companies = $_tmpCompanies['data'];
                     $products = [];
