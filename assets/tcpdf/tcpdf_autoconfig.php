@@ -137,19 +137,19 @@ if (!defined('PDF_PAGE_ORIENTATION')) {
 }
 
 if (!defined('PDF_CREATOR')) {
-	define ('PDF_CREATOR', 'ZAWebs');
+	define ('PDF_CREATOR', 'TCPDF');
 }
 
 if (!defined('PDF_AUTHOR')) {
-	define ('PDF_AUTHOR', 'ZAWebs');
+	define ('PDF_AUTHOR', 'TCPDF');
 }
 
 if (!defined('PDF_HEADER_TITLE')) {
-	define ('PDF_HEADER_TITLE', 'ZAWebs');
+	define ('PDF_HEADER_TITLE', 'TCPDF Example');
 }
 
 if (!defined('PDF_HEADER_STRING')) {
-	define ('PDF_HEADER_STRING', "by ZAWebs");
+	define ('PDF_HEADER_STRING', "by Nicola Asuni - Tecnick.com\nwww.tcpdf.org");
 }
 
 if (!defined('PDF_UNIT')) {
