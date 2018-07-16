@@ -57,7 +57,7 @@ class products
             {
                 $_tmpCompanies = $db->select( "SELECT id, company FROM companies WHERE canceled='false'" );
 
-                if ( count( $_tmpCompanies['data'] ) > 0 )
+                if ( count( $_tmpCompanies['data'] > 0 ) )
                 {
                     $_companies = $_tmpCompanies['data'];
                     $products = [];
@@ -74,7 +74,7 @@ class products
                             categories.category AS categoryName,
                             (SELECT date FROM invoices_items WHERE invoices_items.products=products.id ORDER BY date DESC LIMIT 1) AS lastInvoice
                             FROM categories RIGHT JOIN (clients RIGHT JOIN products ON clients.id=products.clients) ON categories.id=products.categories
-                            WHERE products.canceled='false' AND ((products.renewable='a'  AND products.month='" . $d1['mon'] . "') OR (products.renewable='m' OR products.renewable='r' OR products.renewable='o'))";
+                            WHERE products.canceled='false' AND ((products.renewable='a' AND products.month='" . $d1['mon'] . "') OR (products.renewable='m' OR products.renewable='r' OR products.renewable='o'))";
                         $_sql .= " AND products.companies='" . $_company['id'] . "'";
 
                         if ( isset( $_POST['sortClients'] ) )
@@ -108,9 +108,7 @@ class products
 
                                     if ( empty( $prod['lastInvoice'] ) )
                                     {
-
                                         $add = true;
-
                                     }
                                     else
                                     {
@@ -127,7 +125,7 @@ class products
                                 {
 
 //if the difference between the posted date and last invoice is 1
-                                    if ( $_invoiceMonthDiff == 1 )
+                                    if ( $_invoiceMonthDiff == 1 || $prod['lastInvoice'] == '' )
                                     {
                                         $add = true;
                                     }
@@ -195,6 +193,7 @@ class products
 
             $vars = [
                 "companies" => $_POST['companies'],
+                // "date" => $_POST['date'],
                 "year" => $_date['year'],
                 "month" => $_date['mon'],
                 "description" => ( isset( $_POST['description'] ) ? $_POST['description'] : null ),
@@ -239,7 +238,6 @@ class products
             }
             elseif ( $_POST['view_type'] == "save" )
             {
-
                 $res = $db->update( $this->table, $vars, $_POST['id'] );
 
                 if ( $res )
@@ -273,8 +271,10 @@ class products
 
     public function update()
     {
+
         if ( $_POST['state'] != null )
         {
+
             if ( $_POST['state'] == 'cancel' || $_POST['state'] == 'enable' )
             {
                 global $db;
@@ -322,6 +322,7 @@ class products
 
     public function view()
     {
+
         if ( isset( $_POST['view_type'] ) )
         {
             global $db;
@@ -373,6 +374,7 @@ class products
 
                 if ( count( $_searchArray ) > 0 )
                 {
+
                     if ( count( $_whereArray ) == 0 )
                     {
                         $_where = " WHERE ";
@@ -447,6 +449,7 @@ class products
                 }
                 elseif ( isset( $_POST['invoice_type'] ) )
                 {
+
                     switch ( $_POST['invoice_type'] )
                     {
                         case "due":
@@ -500,7 +503,7 @@ class products
                         if ( $prod['renewable'] == 'a' )
                         {
 
-                            if ( empty( $prod['lastInvoice'] ) )
+                            if ( $prod['lastInvoice'] != '' )
                             {
 
                                 if ( !isset( $_POST['invoice_type'] ) )
@@ -539,6 +542,7 @@ class products
                             }
                             else
                             {
+                                $_invoiceYearDiff = diff_years( $_POST['date'], $prod['date'] );
 
                                 if (  ( $_invoiceYearDiff == 1 ) && ( $_prodMonthDiff == 0 ) )
                                 {
@@ -551,8 +555,18 @@ class products
                         elseif ( $prod['renewable'] == 'm' )
                         {
 
+                            if ( $prod['lastInvoice'] == '' )
+                            {
+                                $_invoiceMonthDiff = diff_months( $_POST['date'], $prod['date'] );
+                            }
+
 //if the difference between the posted date and last invoice is 1
-                            if ( $_invoiceMonthDiff == 1 )
+                            if (  ( $prod['lastInvoice'] != '' ) && ( $_invoiceMonthDiff == 1 ) )
+                            {
+                                $add = true;
+                            }
+
+                            if (  ( $prod['lastInvoice'] == '' ) && ( $_invoiceMonthDiff == 0 ) )
                             {
                                 $add = true;
                             }
