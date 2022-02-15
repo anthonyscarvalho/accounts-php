@@ -9,8 +9,8 @@ define('DB_HOST', 'localhost');
  * Local Database configuration
  */
 
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'samsung{48}');
+define('DB_USERNAME', 'localhost');
+define('DB_PASSWORD', '382563');
 define('DB_NAME', 'accounts');
 
 /*

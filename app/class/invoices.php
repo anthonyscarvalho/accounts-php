@@ -614,6 +614,10 @@ class invoices
             {
                 $_termsOfService = $db->select( "SELECT * FROM template_attachments WHERE id='" . $_templates['terms_of_service'] . "';", 'true' );
             }
+            else
+            {
+                $_termsOfService['data']['template'] = '';
+            }
 
             $_pdfData['pdfName'] = $_client['data']['id'] . '-' . $_client['data']['business'] . '-' . $_invoice['data']['id'] . '.pdf';
 

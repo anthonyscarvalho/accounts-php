@@ -142,7 +142,7 @@ function callHook()
     }
 }
 
-function __autoload($className)
+spl_autoload_register( function ( $className )
 {
     if (file_exists(ROOT . DS . 'app' . DS . 'class' . DS . $className . '.php'))
     {
@@ -156,4 +156,12 @@ function __autoload($className)
     {
         echo 'no such class';
     }
-}
+    
+// else
+
+// {
+
+//     throw new Exception( $className . ' class found' );
+    // }
+
+} );
