@@ -3,14 +3,14 @@
  * Database configuration
  */
 
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'host.docker.internal:3307');
 
 /*
  * Local Database configuration
  */
 
-define('DB_USERNAME', 'localhost');
-define('DB_PASSWORD', '382563');
+define('DB_USERNAME', 'accounts');
+define('DB_PASSWORD', 'accounts');
 define('DB_NAME', 'accounts');
 
 /*
