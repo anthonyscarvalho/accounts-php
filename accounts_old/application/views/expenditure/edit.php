@@ -1,0 +1,63 @@
+<div class="modal-header">Edit Expense #{{results.id}}<button class="close" ng-click="close()" type="button"><span class="fa fa-times"></span></button></div>
+<div class="modal-body">
+    <form ng-submit="save()" method="post" id="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Company</label>
+                        <div class="btn-group btn-group-sm" data-toggle="buttons">
+                            <label class="btn btn-default" ng-repeat="res in companies" ng-model="results.companies" uib-btn-radio="res.id" required>{{res.company}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select class="form-control" required ng-model="results.categories" chosen options="categories">
+                            <option value="">Please select one</option>
+                            <option ng-repeat="res in categories" value="{{res.id}}" required>{{res.category}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Expense Type</label>
+                        <div class="btn-group btn-group-sm" data-toggle="buttons">
+                            <label class="btn btn-default" ng-model="results.type" uib-btn-radio="'Fixed Cost'" required>Fixed Cost</label>
+                            <label class="btn btn-default" ng-model="results.type" uib-btn-radio="'Supplemental'" required>Supplemental</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Date (yyyy-mm-dd)</label>
+                        <input type="text" class="form-control" maxlength="250" ng-model="results.date" value="" required data-date-format="yyyy-mm-dd" data-provide="datepicker">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Amount</label>
+                        <input type="text" class="form-control" maxlength="250" ng-model="results.amount" id="amount" required value="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" maxlength="250" ng-model="results.description" id="price" value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <a ng-if="submitted" class="btn btn-info"><span class="fa fa-refresh fa-spin"></span></a>
+    <button ng-if="!submitted" type="submit" name="submitbtn" value="insert" class="btn btn-success" form="form"><span class="fa fa-save"></span></button>
+</div>

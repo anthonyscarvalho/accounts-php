@@ -1,0 +1,31 @@
+<div class="modal-header">Edit Company # {{results.id}} <button class="close" ng-click="close()" type="button"><span class="fa fa-times"></span></button></div>
+<div class="modal-body">
+    <form ng-submit="save()" method="post" id="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" class="form-control" ng-model="results.company">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="well well-sm">
+                        <legend>Bank Details</legend>
+                        <textarea ng-model="results.account_details"  class="form-control" ui-tinymce=""  style="height:200px">{{results.account_details}}</textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="well well-sm">
+                        <legend>Invoice Header</legend>
+                        <textarea ng-model="results.invoice_header" ui-tinymce="" class="form-control" style="height:200px">{{results.invoice_header}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <a ng-if="submitted" class="btn btn-info"><span class="fa fa-refresh fa-spin"></span></a>
+    <button ng-if="!submitted" type="submit" name="submit" value="insert" class="btn btn-success" form="form"><span class="fa fa-save"></span></button>
+</div>

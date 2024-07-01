@@ -1,0 +1,24 @@
+<form ng-submit="add()" method="post" >
+    <div class="modal-header">Add Client To Campaign <button class="close" ng-click="close()" type="button"><span class="fa fa-times"></span></button></div>
+    <div class="modal-body">
+       <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Client</label>
+                    <select class="form-control" required chosen options="results" ng-model="data.clients">
+                        <option value="">Please select one</option>
+                        <option ng-repeat="res in results" ng-value="{{res.id}}">{{res.business}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a ng-if="submitted" class="btn btn-info"><span class="fa fa-refresh fa-spin"></span></a>
+                <button ng-if="!submitted" type="submit" name="submit" value="insert" class="btn btn-success"><span class="fa fa-save"></span></button>
+            </div>
+        </div>
+    </div>
+</form>

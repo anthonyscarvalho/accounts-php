@@ -1,0 +1,127 @@
+<div class="m-app-loading" ng-animate-children></div>
+<?php
+include("../nav_main.php");
+?>
+<form method="post" ng-submit="save( )" id="clientsForm">
+   <div class="row">
+      <div class="col-lg-6">
+         <div class="panel panel-default">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <label>Business Name</label>
+                     <input type="text" class="form-control" maxlength="300" ng-model="results.business">
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label>Number</label>
+                     <input type="text" class="form-control" maxlength="100" ng-model="results.number">
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label>Fax</label>
+                     <input type="text" class="form-control" maxlength="20" ng-model="results.fax">
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label>VAT #</label>
+                     <input type="text" class="form-control" maxlength="20" ng-model="results.vat">
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>Billing Address</label>
+                     <textarea class="form-control" rows="4" maxlength="500" ng-model="results.billing_address"></textarea>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>City</label>
+                     <input type="text" class="form-control" maxlength="100" ng-model="results.city">
+                  </div>
+                  <div class="form-group">
+                     <label>Postal Code</label>
+                     <input type="text" class="form-control" maxlength="20" ng-model="results.postal_code">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-6">
+         <div class="panel panel-default">
+            <div class="row">
+               <div class="col-md-12">
+                  <label>Credit</label>
+                  <input type="text" class="form-control" disabled maxlength="250" value="{{credit| currency:'R '}}">
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <label>Notes</label>
+                  <textarea class="form-control" rows="4" ng-model="results.notes"></textarea>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-4">
+                  <label>Bad Client</label>
+                  <div class="btn-group btn-group-sm">
+                     <label class="btn btn-default" ng-model="results.bad_client" uib-btn-radio="'true'" uncheckable>True</label>
+                     <label class="btn btn-default" ng-model="results.bad_client" uib-btn-radio="'false'" uncheckable>False</label>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <label>Signed Up</label>
+                  <input type="text" class="form-control" disabled maxlength="20" ng-model="results.signup_date">
+               </div>
+               <div class="col-md-4">
+                  <label>Canceled Date</label>
+                  <input type="text" class="form-control" disabled name="canceled_date" ng-model="results.canceled_date">
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   </form>
+   <nav class="navbar navbar-default navbar-bottom" role="navigation">
+      <div class="container">
+         <div ng-if="!submitted">
+            <ul class="nav navbar-nav">
+               <li><a href="#/clients/view" data-toggle="tooltip" title="View All Clients"><span class="fa fa-backward fa-lg"></span></a></li>
+               <li>
+                  <button type="submit" class="btn-save" form="clientsForm"><span class="fa fa-lg fa-save"></span></button>
+               </li>
+               <li ng-if="userRoles.cancel">
+                  <button type="button" ng-click="update( results.id, 'cancel' )" class="btn-save" ng-show="results.canceled == 'false'"><span class="fa fa-lg fa-check"></span></button>
+               </li>
+               <li ng-if="userRoles.enable">
+                  <button type="button" ng-click="update( results.id, 'enable' )" class="btn-save" ng-show="results.canceled == 'true'"><span class="fa fa-lg fa-times"></span></button>
+               </li>
+            </ul>
+         </div>
+         <div ng-if="submitted">
+            <ul class="nav navbar-nav">
+               <li>
+                  <button type="button" class="btn-save"><span class="fa fa-lg fa-refresh fa-spin"></span></button>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+
+<div class="row">
+   <div class="col-md-4">
+      <div class="panel panel-default">
+         <div class="panel-heading">Income Per Annum</div>
+         <div class="panel-body">
+            <canvas class="chart chart-line chart-xl" data="income.data" labels="income.labels" legend="true" series="income.series" colours="lineGraph" options="graphoptions"></canvas>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,181 @@
+<form method="post" ng-submit="save( )">
+    <div class="modal-header">Edit User #{{data.id}} <button class="close" ng-click="close()" type="button"><span class="fa fa-times"></span></button></div>
+    <div class="modal-body">
+        <fieldset>
+            <legend>General Permissions</legend>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Clients</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.clients" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.clients" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Contacts</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default"  ng-model="roles.contacts" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.contacts" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Products</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.products" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.products" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Invoices</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.invoices" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.invoices" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Invoice Items</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.invoices_items" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.invoices_items" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Transactions</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.transactions" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.transactions" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Quotations</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.quotations" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.quotations" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Statements</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.statements" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.statements" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Email Log</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.email_log" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.email_log" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Client Log</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.logs" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.logs" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Adwords</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.campaigns" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.campaigns" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Expenditure</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.expenditure" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.expenditure" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+            </div>
+            <legend>Admin Permissions</legend>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Company Income</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.company_income" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.company_income" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Companies</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.companies" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.companies" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Categories</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.categories" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.categories" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Users</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.users" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.users" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>User Roles</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.user_roles" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.user_roles" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Email Templates</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.template_emails" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.template_emails" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>PDF Templates</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.template_attachments" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.template_attachments" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+            </div>
+            <legend>Reports Permissions</legend>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Payments</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.report_payments" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.report_payments" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Control Sheet</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.report_controlsheet" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.report_controlsheet" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Expenses</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.report_expenses" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.report_expenses" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Income</label>
+                    <div class="btn-group btn-group-sm">
+                        <label class="btn btn-default" ng-model="roles.report_income" uib-btn-radio="'true'" uncheckable>True</label>
+                        <label class="btn btn-default" ng-model="roles.report_income" uib-btn-radio="'false'" uncheckable>False</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <a ng-if="submitted" class="btn btn-info"><span class="fa fa-refresh fa-spin"></span></a>
+        <button ng-if="!submitted" type="submit" name="submit" value="insert" class="btn btn-success" title="Insert Contact"><span class="fa fa-save"></span></button>
+    </div>
+</form>

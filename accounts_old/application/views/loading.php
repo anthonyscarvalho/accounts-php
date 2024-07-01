@@ -1,0 +1,3 @@
+<div class="loading">
+    <div class="well well-sm" style="width:150px; margin: 0 auto;">LOADING...</div>
+</div>

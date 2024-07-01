@@ -1,0 +1,9 @@
+.pagination {
+    margin: 0px;
+}
+
+.pagination-sm > li > a,
+.pagination-sm > li > span {
+    width: 35px;
+    text-align: center;
+}

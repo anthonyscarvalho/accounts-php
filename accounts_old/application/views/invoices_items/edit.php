@@ -1,0 +1,37 @@
+<div class="modal-header">Edit Invoice Item #{{data.id}} <button class="close" ng-click="close()" type="button"><span class="fa fa-times"></span></button></div>
+<div class="modal-body">
+    <form method="post" ng-submit="save()" id="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Invoice ID</label>
+                    <input type="text" class="form-control" ng-model="data.invoices" disabled="disabled">
+                </div>
+                <div class="col-sm-6">
+                    <label>Item</label>
+                    <input type="text" class="form-control" ng-model="data.categoryName" disabled="disabled">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Date</label>
+                    <input type="text" class="form-control" ng-model="data.date" disabled="disabled">
+                </div>
+                <div class="col-sm-4">
+                    <label>Price</label>
+                    <input type="text" class="form-control" maxlength="250" ng-model="data.price" id="price" required value="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Description</label>
+                    <input type="text" class="form-control" maxlength="200" ng-model="data.description" value="">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <a ng-if="submitted" class="btn btn-info"><span class="fa fa-refresh fa-spin"></span></a>
+    <button ng-if="!submitted" type="submit" name="submitbtn" value="insert" class="btn btn-success" form="form"><span class="fa fa-save"></span></button>
+</div>

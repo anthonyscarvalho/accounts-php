@@ -1,0 +1,40 @@
+.btn-cust {
+    background-color: #337AB7;
+    color: #fff;
+}
+
+.btn-cust:hover {
+    background-color: #1E486B;
+    color: #fff;
+}
+
+.btn-group-vertical > .btn,
+.btn-group-vertical > .btn-group,
+.btn-group-vertical > .btn-group > .btn {
+    display: inherit;
+}
+
+.btn[disabled],
+.btn.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn-save {
+    background-color: transparent;
+    padding: 15px;
+    border: 0px;
+    color: #fff;
+}
+
+.btn-default:active,
+.btn-default.active {
+    color: #FFF;
+    background-color: #449D44 !important;
+    border-color: #398439;
+    text-shadow: 0px;
+}
+.modal-header .close{
+    opacity: 1;
+    color: #fff;
+}

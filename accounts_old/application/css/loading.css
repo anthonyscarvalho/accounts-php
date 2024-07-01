@@ -1,0 +1,42 @@
+div.m-app-loading {
+    position: fixed ;
+    z-index: 99999999 ;
+}
+div.m-app-loading div.animated-container {
+    background-color: #000;
+    bottom: 0px ;
+    left: 0px ;
+    position: fixed ;
+    right: 0px ;
+    top: 0px ;
+
+}
+
+/* Used to initialize the ng-leave animation state. */
+div.m-app-loading div.animated-container.ng-leave {
+    opacity: 1.0 ;
+    transition: all linear 200ms ;
+    -webkit-transition: all linear 200ms ;
+}
+
+div.m-app-loading div.messaging {
+    color: #FFFFFF ;
+    left: 0px ;
+    margin-top: -37px ;
+    position: absolute ;
+    right: 0px ;
+    text-align: center ;
+    top: 50% ;
+}
+
+div.m-app-loading h1 {
+    font-size: 40pt;
+    margin: 0px 0px 20px 0px ;
+    font-family: Tahoma !important;
+}
+
+div.m-app-loading p {
+    font-size: 18px ;
+    margin: 0px 0px 0px 0px ;
+    font-family: Tahoma !important;
+}
