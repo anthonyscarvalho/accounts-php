@@ -33,9 +33,9 @@ date_default_timezone_set('Africa/Johannesburg');
  * Email settings
  */
 define("emailCompany", "Company");
-define("emailAddress", "accounts@zawebs.com");
+define("emailAddress", "");
 define("emailServer", "mail.zawebs.com");
-define("emailPassword", "5_8o7F3X1~i3bp;W3J");
+define("emailPassword", "");
 ini_set('log_errors', 'On');
 ini_set('error_log', ROOT . DS . 'tmp' . DS . 'logs' . DS . 'error.log');
 define('DOMAIN', $_SERVER['HTTP_HOST']);
