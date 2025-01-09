@@ -344,7 +344,7 @@ class campaigns_statements
                 $temp = $db->select($_sql);
                 $_temp2 = $temp['data'];
 
-                $_sql = "SELECT id, date, 'Payment - To ZAWebs' AS description, credit, debit FROM ad_transactions
+                $_sql = "SELECT id, date, 'Payment received' AS description, credit, debit FROM ad_transactions
                 WHERE campaigns='" . $_POST['campaigns'] . "' AND debit IS NOT NULL AND date>='" . $d1['year'] . "-" . $d1['mon'] . "-01" . "' AND date<'" . $d1['year'] . "-" . ($d1['mon'] + 1) . "-01" . "' AND commission='true'
                 ORDER BY id;";
 

@@ -31,7 +31,7 @@
                             </label>
                             <select class="form-control" chosen options="categories" ng-model="results.categories" ng-change="updatePrice()" id="categories">
                                 <option value="">Please select one</option>
-                                <option ng-repeat="res in categories" ng-value="{{res.id}}" data-price="{{res.price}}">{{res.category}}</option>
+                                <option ng-repeat="res in categories" ng-value="{{res.id}}" value="{{res.id}}" data-price="{{res.price}}">{{res.category}}</option>
                             </select>
                         </div>
                     </div>

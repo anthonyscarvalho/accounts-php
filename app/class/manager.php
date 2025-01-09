@@ -1,15 +1,12 @@
 <?php
 
-class manager
-{
-    public function combine($type = null)
-    {
+class manager {
+    public function combine($type = null) {
         $cache = false;
 
         $cachedir = ROOT . DS . 'tmp' . DS . 'cache';
 
-        switch ($type)
-        {
+        switch ($type) {
             case 'js':
                 $elements = [
                     CORE_ASSETS_DIR . DS . 'js' . DS . "jquery.min",
@@ -61,32 +58,25 @@ class manager
                 break;
         }
 
-        if ($type === 'js')
-        {
+        if ($type === 'js') {
             $_dir = ROOT . DS . 'application' . DS . 'controls' . DS;
 
             $_scnaFiles = scandir($_dir);
 
-            foreach ($_scnaFiles as $file)
-            {
-                if ($file != '.' && $file != '..')
-                {
+            foreach ($_scnaFiles as $file) {
+                if ($file != '.' && $file != '..') {
                     $tmp = explode('.', $file);
 
                     array_push($elements, $_dir . $tmp[0]);
                 }
             }
-        }
-        elseif ($type === 'css')
-        {
+        } elseif ($type === 'css') {
             $_dir = ROOT . DS . 'application' . DS . 'css' . DS;
 
             $_scnaFiles = scandir($_dir);
 
-            foreach ($_scnaFiles as $file)
-            {
-                if ($file != '.' && $file != '..')
-                {
+            foreach ($_scnaFiles as $file) {
+                if ($file != '.' && $file != '..') {
                     $tmp = explode('.', $file);
                     array_push($elements, $_dir . $tmp[0]);
                 }
@@ -96,77 +86,70 @@ class manager
         include ROOT . DS . 'app' . DS . 'library' . DS . 'combine.php';
     }
 
-    public function getActiveYear()
-    {
+    public function getActiveYear() {
         $date = getdate(date(strtotime("U")));
 
-        if ($date['mon'] < 3)
-        {
+        if ($date['mon'] < 3) {
             $_results['data'] = ($date['year'] - 1);
-        }
-        else
-        {
+        } else {
             $_results['data'] = $date['year'];
         }
 
         return $_results;
     }
 
-    public function jsonLog()
-    {
+    public function jsonLog() {
         global $db;
         $start = 4000;
         $limit = 1000;
         $logs = $db->select("SELECT id, data FROM logs ORDER BY id LIMIT " . $start . ", " . $limit . ";");
 
-        foreach ($logs['data'] as $log)
-        {
+        foreach ($logs['data'] as $log) {
             $data = $log['data'];
 
-// $data = str_replace('[', '{', $data);
+            // $data = str_replace('[', '{', $data);
 
-// $data = str_replace(']', '}', $data);
+            // $data = str_replace(']', '}', $data);
 
-// $data = str_replace(',', ':', $data);
+            // $data = str_replace(',', ':', $data);
 
-// $data = str_replace('}: {', ', ', $data);
+            // $data = str_replace('}: {', ', ', $data);
             // $data = str_replace(': ', ':', $data);
             $data = ltrim($data, '[');
             $data = rtrim($data, ']');
             $data = '[' . $data;
             $array = explode('], ', $data);
 
-// echo $data;
+            // echo $data;
             // print_r($array);
             $tmp = [];
 
-            foreach ($array as $val => $key)
-            {
+            foreach ($array as $val => $key) {
                 $_tmp = ltrim($key, '[');
                 $_tmp = str_replace('"', '', $_tmp);
                 $_arr = explode(',', $_tmp);
 
-// print_r($_arr);
+                // print_r($_arr);
 
-// echo $_tmp;
+                // echo $_tmp;
                 // array.push($tmp);
                 $tmp[$_arr[0]] = $_arr[1];
                 // array_push($tmp,[$_arr[0]=>$_arr[1]]);
             }
 
-// print_r($tmp);
+            // print_r($tmp);
 
-// echo json_encode($tmp);
+            // echo json_encode($tmp);
 
-// // echo ('{'.$data.'}');
+            // // echo ('{'.$data.'}');
             // echo "\n";
             $vars = [
                 'data' => json_encode($tmp)
             ];
 
-// print_r($data);
+            // print_r($data);
 
-// $json = json_encode($data[0]);
+            // $json = json_encode($data[0]);
             // echo $json;
             $db->update('logs', $vars, $log['id']);
         }
@@ -174,67 +157,52 @@ class manager
         echo 'complete';
     }
 
-    public function logout()
-    {
+    public function logout() {
         $db = new sql();
         $_session = "SELECT * FROM sessions WHERE session='" . $_COOKIE["PHPSESSID"] . "';";
         $tot = $db->numRows($_session);
 
-        if ($tot > 0)
-        {
+        if ($tot > 0) {
             $res = $db->select($_session, 'true');
             $_removeSession = "DELETE FROM sessions WHERE id='" . $res['data']['id'] . "';";
             $_res = $db->update($_removeSession);
 
-            if ($_res)
-            {
+            if ($_res) {
                 $_results = ["logged_in" => "false", "user" => "", "message" => "you have been logged out", "data" => "true"];
-            }
-            else
-            {
+            } else {
                 $_results = ["logged_in" => "false", "user" => "", "message" => $db->getError(), "data" => "false"];
             }
-        }
-        else
-        {
+        } else {
             $_results = ["logged_in" => "false", "user" => "", "message" => "record does not exist", "data" => "true"];
         }
 
         return $_results;
     }
 
-    public function proposals($id = null, $contact = null)
-    {
+    public function proposals($id = null, $contact = null) {
         global $db;
         $_display = false;
         $_accepted = false;
         $_quotation = performAction('quotations', 'edit', [$id => $id]);
 
-        if ($_quotation['data'] !== 'false')
-        {
+        if ($_quotation['data'] !== 'false') {
             $_display = true;
         }
 
-        if ((isset($_POST['submit'])) && ($_display) && ($_quotation['data']['accepted'] == 'false'))
-        {
-            if (($_POST['submit'] === 'accept') || ($_POST['submit'] === 'deny'))
-            {
+        if ((isset($_POST['submit'])) && ($_display) && ($_quotation['data']['accepted'] == 'false')) {
+            if (($_POST['submit'] === 'accept') || ($_POST['submit'] === 'deny')) {
                 $_display = false;
 
-                if ($_POST['submit'] == 'accept')
-                {
+                if ($_POST['submit'] == 'accept') {
                     $_sql = "UPDATE quotations SET accepted='true' AND accepted_date='" . current_date() . "' WHERE id='" . $_quotation['data']['id'] . "';";
-                }
-                else
-                {
+                } else {
                     $_sql = "UPDATE quotations SET accepted='false' AND accepted_date=NULL WHERE id='" . $_quotation['data']['id'] . "';";
                 }
 
                 $res = $db->update($_sql);
                 $_contacts = $db->numRows("SELECT id FROM quotations_accepted WHERE quotations='" . $_quotation['data']['id'] . "' AND contacts='" . $contact . "';");
 
-                if ($res && ($_contacts == 0))
-                {
+                if ($res && ($_contacts == 0)) {
                     $_vars = [
                         "quotations" => $_quotation['data']['id'],
                         "contacts" => $contact,
@@ -243,38 +211,28 @@ class manager
                     ];
                     $res = $db->insertData($this->table, $vars);
 
-                    if ($res)
-                    {
+                    if ($res) {
                         $_results['data'] = 'true';
                         $_results['message'] = 'added';
-                    }
-                    elseif (!$res)
-                    {
+                    } elseif (!$res) {
                         $_results['data'] = 'false';
                         $_results['message'] = $db->getError();
                     }
-                }
-                elseif ($_contacts > 0)
-                {
+                } elseif ($_contacts > 0) {
                     $_display = true;
                     $_accepted = true;
-                }
-                else
-                {
+                } else {
                     $_display = true;
                     $_accepted = false;
                 }
 
                 echo $_POST['submit'];
-            }
-            else
-            {
+            } else {
                 $_display = true;
             }
         }
 
-        if (!empty($id) && !empty($contact) && ($_display))
-        {
+        if (!empty($id) && !empty($contact) && ($_display)) {
             $_contact = performAction('contacts', 'edit', [$id => $contact]);
             $_client = performAction('clients', 'edit', [$id => $_quotation['data']['clients']]);
             $_company = performAction('companies', 'edit', [$id => $_quotation['data']['companies']]);
@@ -282,73 +240,52 @@ class manager
             $_timeLeft = diff_days($_quotation['data']['creation_date'], $_currentDate);
             $_contactsTmp = $db->numRows("SELECT id FROM quotations_accepted WHERE contacts='" . $contact . "' AND quotations='" . $_quotation['data']['id'] . "';");
 
-            if (($_quotation['data']['accepted'] == 'true') || ($_timeLeft <= 30))
-            {
+            if (($_quotation['data']['accepted'] == 'true') || ($_timeLeft <= 30)) {
                 $_timeLeft = (30 - $_timeLeft);
                 include ROOT . DS . 'application' . DS . 'templates' . DS . 'proposal.php';
-            }
-            else
-            {
+            } else {
                 echo 'not valid anymore;';
             }
-        }
-        else
-        {
+        } else {
             echo 'Incorrect information provided';
             exit();
         }
     }
 
-    public function signin()
-    {
-        if (isset($_POST['username']) && isset($_POST['password']))
-        {
+    public function signin() {
+        if (isset($_POST['username']) && isset($_POST['password'])) {
             $_usrName = strtolower($_POST['username']);
             $_usrPsw = $_POST['password'];
 
-            if (($_usrName != "") && ($_usrPsw != ""))
-            {
+            if (($_usrName != "") && ($_usrPsw != "")) {
                 global $db;
                 $_user = "SELECT * FROM users WHERE username='" . $_usrName . "';";
                 $total_users = $db->numRows($_user);
 
-                if ($total_users == 1)
-                {
+                if ($total_users == 1) {
                     $users = $db->select($_user, 'true');
                     $user = $users['data'];
 
-                    if (!maintenance_mode)
-                    {
+                    if (!maintenance_mode) {
                         $log_in = true;
-                    }
-                    else
-                    {
-                        if ($user['roles'] == 2)
-                        {
+                    } else {
+                        if ($user['roles'] == 2) {
                             $log_in = true;
-                        }
-                        else
-                        {
+                        } else {
                             $log_in = false;
                         }
                     }
 
-                    if ($log_in)
-                    {
-                        if ($user['canceled'] == 'false')
-                        {
+                    if ($log_in) {
+                        if ($user['canceled'] == 'false') {
                             $user_md5 = LOGIN_KEY . md5($_usrPsw);
                             $_tempUsers = $db->select("SELECT * FROM sessions WHERE user='" . $user['id'] . "';");
 
-                            if (count($_tempUsers['data']) > 1)
-                            {
+                            if (count($_tempUsers['data']) > 1) {
                                 $db->deleteData('sessions', "user='" . $user['id'] . "'");
-                            }
-                            elseif (count($_tempUsers['data']) == 1)
-                            {
-// print_r($_tempUsers);
-                                if ($_tempUsers['data'][0]['session'] != $_COOKIE["PHPSESSID"])
-                                {
+                            } elseif (count($_tempUsers['data']) == 1) {
+                                // print_r($_tempUsers);
+                                if ($_tempUsers['data'][0]['session'] != $_COOKIE["PHPSESSID"]) {
                                     $vars = [
                                         "session" => $_COOKIE["PHPSESSID"]
                                     ];
@@ -359,34 +296,25 @@ class manager
                             $_session = "SELECT * FROM sessions WHERE session='" . $_COOKIE["PHPSESSID"] . "';";
                             $total_session = $db->numRows($_session);
 
-                            if ($total_session > 1)
-                            {
+                            if ($total_session > 1) {
                                 $db->deleteData('sessions', "session='" . $_COOKIE["PHPSESSID"] . "'");
                                 $sessions = "";
                                 $session_id = null;
-                            }
-                            elseif ($total_session == 1)
-                            {
+                            } elseif ($total_session == 1) {
                                 $sessions = $db->select($_session, 'true');
                                 $session_id = $sessions['data']['id'];
-                            }
-                            else
-                            {
+                            } else {
                                 $sessions = "";
                                 $session_id = null;
                             }
 
-                            if ($user_md5 === $user['password'])
-                            {
+                            if ($user_md5 === $user['password']) {
                                 $_valid = 'true';
-                            }
-                            elseif ($user_md5 !== $user['password'])
-                            {
+                            } elseif ($user_md5 !== $user['password']) {
                                 $_valid = 'false';
                             }
 
-                            if ($_valid == "true")
-                            {
+                            if ($_valid == "true") {
                                 $vars = [
                                     "session" => $_COOKIE["PHPSESSID"],
                                     "time" => current_dateTime(),
@@ -394,58 +322,40 @@ class manager
                                     "user" => $user['id']
                                 ];
 
-                                if (!empty($session_id))
-                                {
+                                if (!empty($session_id)) {
                                     $res = $db->update('sessions', $vars, $session_id);
-                                }
-                                else
-                                {
+                                } else {
                                     $res = $db->insertData('sessions', $vars);
                                 }
 
-                                if ($res)
-                                {
+                                if ($res) {
                                     $_results['data'] = "true";
                                     $_results['message'] = "logged in";
-                                }
-                                else
-                                {
+                                } else {
                                     $_results['data'] = "false";
                                     $_results['message'] = "error occurred";
                                 }
-                            }
-                            elseif ($_valid == "false")
-                            {
+                            } elseif ($_valid == "false") {
                                 $_results['data'] = "false";
                                 $_results['message'] = "incorrect password";
                             }
-                        }
-                        else
-                        {
+                        } else {
                             $_results['data'] = "false";
                             $_results['message'] = "no such user";
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $_results['data'] = "false";
                         $_results['message'] = "maintenance mode active";
                     }
-                }
-                else
-                {
+                } else {
                     $_results['data'] = "false";
                     $_results['message'] = "no such user";
                 }
-            }
-            elseif (($_usrName == "") || ($_usrPsw == ""))
-            {
+            } elseif (($_usrName == "") || ($_usrPsw == "")) {
                 $_results['data'] = "false";
                 $_results['message'] = "no data passed";
             }
-        }
-        elseif (!isset($_POST['username']) || !isset($_POST['password']))
-        {
+        } elseif (!isset($_POST['username']) || !isset($_POST['password'])) {
             $_results['data'] = "false";
             $_results['message'] = "no data passed";
         }
@@ -455,16 +365,13 @@ class manager
         return $_results;
     }
 
-    public function ticketImport($department = null)
-    {
-        if ((!empty($department)) && (is_numeric($department)))
-        {
+    public function ticketImport($department = null) {
+        if ((!empty($department)) && (is_numeric($department))) {
             global $db;
             $_sql = "SELECT * FROM departments WHERE id='" . $department . "';";
             $_count = $db->numRows($_sql);
 
-            if ($_count > 0)
-            {
+            if ($_count > 0) {
                 $_tempDep = $db->select($_sql, 'true');
                 $_dep = $_tempDep['data'];
                 $popCon = new mail_import();
@@ -476,10 +383,8 @@ class manager
                 // print_r($_emails);
                 $a = 0;
 
-                foreach ($_emails as $_email)
-                {
-                    if ($a == 1)
-                    {
+                foreach ($_emails as $_email) {
+                    if ($a == 1) {
                         break;
                     }
 
@@ -497,29 +402,23 @@ class manager
                 $_results['headers'] = '';
                 $_results['nologin'] = 'true';
 
-// print_r($_results);
+                // print_r($_results);
 
                 //return $_results;
-            }
-            else
-            {
+            } else {
                 echo 'no such department';
             }
-        }
-        else
-        {
+        } else {
             echo 'no department selected';
         }
     }
 
-    public function updateAdLog($_data = null)
-    {
+    public function updateAdLog($_data = null) {
         global $db;
         $db->insertData('ad_logs', $_data);
     }
 
-    public function updateEmailLog($contact = null, $user = null, $subject = null, $body = null, $status = null)
-    {
+    public function updateEmailLog($contact = null, $user = null, $subject = null, $body = null, $status = null) {
         $db = new sql();
         $vars = [
             "users" => $user,
@@ -533,23 +432,19 @@ class manager
         $db->insertData('email_log', $vars);
     }
 
-    public function updateLog($table = null, $_data = null)
-    {
+    public function updateLog($table = null, $_data = null) {
         global $db;
 
-        if (isset($table))
-        {
+        if (isset($table)) {
             $db->insertData($table, $_data);
         }
     }
 
-    public function updateLogs($parent = null, $user = null, $action = null, $affected_table = null, $_data = null)
-    {
+    public function updateLogs($parent = null, $user = null, $action = null, $affected_table = null, $_data = null) {
         $db = new sql();
         $data = '[';
 
-        foreach ($_data as $key => $var)
-        {
+        foreach ($_data as $key => $var) {
             $data .= '["' . $key . '", "' . $var . '"], ';
         }
 
@@ -567,10 +462,8 @@ class manager
         $db->insertData('logs', $vars);
     }
 
-    public function verify($return = null)
-    {
-        if (isset($_COOKIE["PHPSESSID"]))
-        {
+    public function verify($return = null) {
+        if (isset($_COOKIE["PHPSESSID"])) {
             global $db;
             $valid = 'false';
             $check = false;
@@ -579,8 +472,7 @@ class manager
             // get all avtive sessions from database
             $total_sessions = $db->numRows($_totalSessions);
 
-            if ($total_sessions == 1)
-            {
+            if ($total_sessions == 1) {
                 $session = $db->select($_totalSessions, 'true');
                 //get user details of logged in user
                 $_currentUser = $db->select("SELECT * FROM users WHERE id='" . $session['data']['user'] . "';", 'true');
@@ -593,28 +485,20 @@ class manager
                 //get the current users access list
                 $_access = json_decode($_user['access'], true);
 
-//check if system is in maintenance mode or not
-                if (!maintenance_mode)
-                {
+                //check if system is in maintenance mode or not
+                if (!maintenance_mode) {
                     $check = true;
-                }
-                else
-                {
-                    if ($_user['roles'] == 2)
-                    {
+                } else {
+                    if ($_user['roles'] == 2) {
                         $check = true;
-                    }
-                    else
-                    {
+                    } else {
                         $check = false;
                     }
                 }
 
-//make sure user is logged in and system is not in maintenance mode
-                if ($check)
-                {
-                    if ($session['data']['logged_in'] == "true")
-                    {
+                //make sure user is logged in and system is not in maintenance mode
+                if ($check) {
+                    if ($session['data']['logged_in'] == "true") {
                         $_d1 = $session['data']['time'];
                         $_d2 = current_dateTime();
                         //Convert them to timestamps.
@@ -623,50 +507,34 @@ class manager
                         //Calculate the difference.
                         $diff = $_d2T - $_d1T;
 
-##calculate the difference in seconds between last activity and current time
-                        if ($diff <= login_time)
-                        {
+                        ##calculate the difference in seconds between last activity and current time
+                        if ($diff <= login_time) {
                             $valid = 'true';
-                        }
-                        elseif ($diff > login_time)
-                        {
+                        } elseif ($diff > login_time) {
                             $valid = 'false';
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $valid = 'false';
                     }
-                }
-                else
-                {
+                } else {
                     $valid = 'false';
                 }
 
                 $_updateSession = "UPDATE sessions SET time='" . current_dateTime() . "', logged_in='" . $valid . "' WHERE id='" . $session['data']['id'] . "';";
                 $db->update($_updateSession);
-            }
-            elseif ($total_sessions > 1)
-            {
+            } elseif ($total_sessions > 1) {
                 $db->deleteData('sessions', "session='" . $_COOKIE["PHPSESSID"] . "'");
                 $valid = 'false';
-            }
-            else
-            {
+            } else {
                 $valid = 'false';
             }
 
-            if ($valid == 'true')
-            {
+            if ($valid == 'true') {
                 $_results = ["logged_in" => "true", "user_roles" => $_roles, "user_access" => $_access, "user" => $_user['name'] . " " . $_user['surname']];
-            }
-            elseif ($valid == 'false')
-            {
+            } elseif ($valid == 'false') {
                 $_results = ["logged_in" => "false", "user_roles" => "", "user_access" => "", "user" => ""];
             }
-        }
-        else
-        {
+        } else {
             $_results = ["logged_in" => "false", "user_roles" => "", "user_access" => "", "message" => "no session", "user" => ""];
         }
 

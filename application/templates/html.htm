@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="invoiceSystem">
+
     <head>
-        <title>ZAWebs - Accounts Application</title>
+        <title>Accounts Application</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <link href="/app/manager/combine/css" rel="stylesheet" type="text/css">
@@ -9,10 +10,12 @@
         <script src="/app/manager/combine/js" type="text/javascript"></script>
         <script src="/assets/tinymce/tinymce.min.js" type="text/javascript"></script>
     </head>
+
     <body ng-controller="mainApp">
         <div ng-if="showMenu">
             <ng-include src=" '/application/templates/nav-menu.htm' "></ng-include>
         </div>
         <div ng-view class="view-fade-in mainWindow"></div>
     </body>
+
 </html>

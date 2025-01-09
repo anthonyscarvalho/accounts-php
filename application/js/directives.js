@@ -21,7 +21,7 @@ app.directive("mAppLoading", function($animate, $http)
             });
         },
         restrict: "C",
-        template: '<div class="animated-container"><div id="cssloader"></div><div class="messaging"><h1>ZAWebs Is Making Money</h1><p>Please stand by for your ticket to awesome-town!</p></div></div>'
+        template: '<div class="animated-container"><div id="cssloader"></div><div class="messaging"><h1>You Is Making Money</h1><p>Please stand by for your ticket to awesome-town!</p></div></div>'
     });
 });
 app.directive('chosen', function($timeout)

@@ -12,9 +12,3 @@ services:
       NODE_ENV: production
     ports:
       - 403:80
-    networks:
-      - mariadb
-
-networks:
-  mariadb:
-    external: true

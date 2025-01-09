@@ -3,7 +3,7 @@
  * Database configuration
  */
 
-define('DB_HOST', 'host.docker.internal:3307');
+define('DB_HOST', '192.168.0.201:3306');
 
 /*
  * Local Database configuration
@@ -32,7 +32,7 @@ date_default_timezone_set('Africa/Johannesburg');
 /*
  * Email settings
  */
-define("emailCompany", "ZAWebs cc");
+define("emailCompany", "Company");
 define("emailAddress", "accounts@zawebs.com");
 define("emailServer", "mail.zawebs.com");
 define("emailPassword", "5_8o7F3X1~i3bp;W3J");
@@ -40,23 +40,18 @@ ini_set('log_errors', 'On');
 ini_set('error_log', ROOT . DS . 'tmp' . DS . 'logs' . DS . 'error.log');
 define('DOMAIN', $_SERVER['HTTP_HOST']);
 
-if (DEVELOPMENT_ENVIRONMENT == true)
-{
+if (DEVELOPMENT_ENVIRONMENT == true) {
     error_reporting(E_ALL);
     ini_set('display_errors', 'On');
-}
-else
-{
+} else {
     error_reporting(E_ALL);
     ini_set('display_errors', 'Off');
 }
 
-if (is_file(ROOT . DS . 'tmp' . DS . 'logs' . DS . 'error.log'))
-{
+if (is_file(ROOT . DS . 'tmp' . DS . 'logs' . DS . 'error.log')) {
     $size = filesize(ROOT . DS . 'tmp' . DS . 'logs' . DS . 'error.log');
 
-    if ($size >= 62500000)
-    {
+    if ($size >= 62500000) {
         unlink(ROOT . DS . 'tmp' . DS . 'logs' . DS . 'error.log');
     }
 }
