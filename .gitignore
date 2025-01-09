@@ -43,3 +43,6 @@ testem.log
 .DS_Store
 Thumbs.db
 SyncToy*
+
+# Config file
+/config/config.php
